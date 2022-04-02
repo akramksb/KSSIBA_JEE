@@ -107,3 +107,14 @@ public class MetierImpl implements IMetier{
             System.out.println(metier.calcul());
         }
         ```
+
+    1.  version annotations  
+        On ajoute l'annotaion `@Component` aux classes *DaoImpl* et *MetierImpl*. Puis on utilise l'annotaion `@Autowired` pour l'attribut dao de la classe *MetierImpl*, ou bien on crée un constructeur avec parametres.
+
+        ```java
+        public static void main(String[] args) {
+            ApplicationContext context = new AnnotationConfigApplicationContext("dao", "metier");
+            IMetier metier = (IMetier) context.getBean(IMetier.class);
+            System.out.println(metier.calcul());
+        }
+        ```
