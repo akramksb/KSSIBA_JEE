@@ -63,7 +63,7 @@ public class MetierImpl implements IMetier{
 * Par instanciation dynamique  
     On crée un fichier `config.txt` danslequel on met les noms des classes.
 
-    ![config.txt](screen%20shots/TP1/Screenshot%202022-04-02%20164223.png)
+    ![config.txt](screen%20shots/TP1/configtxt.png)
 
     puis on peut utiliser ces classes avec ``Class.forName( "NomClasse" )``  
     pour instancier des objets on utilise ``ClassName.newInstance()``  
