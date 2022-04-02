@@ -32,7 +32,7 @@ public interface IMetier {
 ```
 
 #### Implémentation de l'interface IMetier avec `couplage faible`  
-*c'est à dire que la classe va depender de l'interface IDao et non pas d'une class*
+*c'est à dire que la classe va depender de l'interface IDao et non pas d'une classe*
 
 ```java
 public class MetierImpl implements IMetier{
@@ -61,7 +61,7 @@ public class MetierImpl implements IMetier{
     ```
 
 * Par instanciation dynamique  
-    on crée un fichier `config.txt` danslequel on met les noms des classes.
+    On crée un fichier `config.txt` danslequel on met les noms des classes.
 
     ![config.txt](screen%20shots/TP1/Screenshot%202022-04-02%20164223.png)
 
@@ -89,5 +89,21 @@ public class MetierImpl implements IMetier{
     }
     ```
 
-    * En utilisant le Framework Spring
+* En utilisant le Framework Spring  
+    1.  version XML
 
+        On crée un fichier XML `Spring Config` que l'on appel `applicationContext.xml` danslequel on ajoute deux beans
+        ```xml
+            <bean id="dao" class="dao.DaoImpl"></bean>
+            <bean id="metier" class="metier.MetierImpl">
+                <property name="dao" ref="dao"></property>
+            </bean>
+        ```
+
+        ```java
+        public static void main(String[] args) {
+            ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+            IMetier metier = (IMetier) context.getBean( "metier" );
+            System.out.println(metier.calcul());
+        }
+        ```

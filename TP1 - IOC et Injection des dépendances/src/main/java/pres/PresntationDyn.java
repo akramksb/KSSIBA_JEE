@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class PresntationDyn {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner( new File( "config.txt" ));
+        Scanner scanner = new Scanner( new File("config.txt"));
         String daoClassName = scanner.nextLine();
         String metierClassName = scanner.nextLine();
         Class cDao = Class.forName( daoClassName );
