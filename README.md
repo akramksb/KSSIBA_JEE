@@ -121,3 +121,57 @@ public class MetierImpl implements IMetier{
 
 
 ## [2 - JPA, Hibernate et Spring Data](./TP2%20-%20JPA%2C%20Hibernate%20et%20Spring%20Data/)
+
+On crée un projet spring avec les dependances suivantes :
+![dependances](screen%20shots/TP2/1dependencies.png)
+
+On modifie le fichier `applicationContext.xml`, danslequel on spécifie note base de donnée et le port de l'application.
+![applicationContext.xml](screen%20shots/TP2/2applicationPropreties.png)
+
+On crée la class persistante Patient avec l'annotaion `@Entity`  
+les annotaions `@Data`, `@NoArgsConstructor` et `@AllArgsConstructor` sont de Lombok pour générer automatiquement les getters et setters, ansi que les constructeur avec et sans paramètres.
+```java
+@Entity
+@Data @NoArgsConstructor @AllArgsConstructor
+public class Patient {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(length = 50)
+    private String nom;
+    ...
+```
+
+On crée une interface `PatientRepository` qui va hériter de `JpaRepository`. Cette interface implemente des methodes qui nous permettent de communiquer avec la base de données, et qui peuvent être personalisées.  
+```java
+public interface PatientRepository extends JpaRepository<Patient, Long> {
+    List<Patient> findByMalade(boolean m);
+    Page<Patient> findByMalade(boolean m, Pageable pageable);
+    List<Patient> findByMaladeAndScoreLessThan(boolean m, int score);
+}
+```
+Pour que notre application soit une application Spring, on ajoute l'annotaion `@SpringBootApplication`.  
+Pour faire les tests sur notre base de donées depuis l'application on peut implemeter l'interface `CommandLineRunner` et redefinir la methode `run`.
+```java
+@SpringBootApplication
+public class JpaApplication implements CommandLineRunner {
+    @Autowired
+    private PatientRepository patientRepository;
+
+    public static void main(String[] args) {
+        SpringApplication.run(JpaApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception 
+    { ... }
+}
+```
+
+Après le demarrage de l'application, on se dirige vers http://localhost:8082/h2-console/ où on peut se connecter à la base de donnée.  
+
+![h2-console](screen%20shots/TP2/3H2Console.png) 
+
+On verifie que les tests marche bien.
+
+![patients](screen%20shots/TP2/Screenshot%202022-04-10%20155926.png)
+
