@@ -61,7 +61,7 @@ public class MetierImpl implements IMetier{
     ```
 
 * Par instanciation dynamique  
-    On crée un fichier `config.txt` danslequel on met les noms des classes.
+    On crée un fichier `config.txt` danslequel on met les noms des classes.  
 
     ![config.txt](screen%20shots/TP1/configtxt.png)
 
@@ -109,7 +109,12 @@ public class MetierImpl implements IMetier{
         ```
 
     1.  version annotations  
-        On ajoute l'annotaion `@Component` aux classes *DaoImpl* et *MetierImpl*. Puis on utilise l'annotaion `@Autowired` pour l'attribut dao de la classe *MetierImpl*, ou bien on crée un constructeur avec parametres.
+        On ajoute l'annotaion `@Component` aux classes *DaoImpl* et *MetierImpl*. Puis on utilise l'annotaion `@Autowired` pour l'attribut dao de la classe *MetierImpl*, ou bien on crée un constructeur avec parametres.  
+
+        ```java
+        @Component
+        public class MetierImpl implements IMetier{ ... }
+        ```        
 
         ```java
         public static void main(String[] args) {
@@ -122,10 +127,10 @@ public class MetierImpl implements IMetier{
 
 ## [2 - JPA, Hibernate et Spring Data](./TP2%20-%20JPA%2C%20Hibernate%20et%20Spring%20Data/)
 
-On crée un projet spring avec les dependances suivantes :
+On crée un projet spring avec les dependances suivantes :  
 ![dependances](screen%20shots/TP2/1dependencies.png)
 
-On modifie le fichier `applicationContext.xml`, danslequel on spécifie note base de donnée et le port de l'application.
+On modifie le fichier `applicationContext.xml`, danslequel on spécifie note base de donnée et le port de l'application.  
 ![applicationContext.xml](screen%20shots/TP2/2applicationPropreties.png)
 
 On crée la class persistante Patient avec l'annotaion `@Entity`  
@@ -167,11 +172,11 @@ public class JpaApplication implements CommandLineRunner {
 }
 ```
 
-Après le demarrage de l'application, on se dirige vers http://localhost:8082/h2-console/ où on peut se connecter à la base de donnée.  
+Après le demarrage de l'application, on se dirige vers http://localhost:8082/h2-console/ où on peut se connecter à la base de donnée.   
 
 ![h2-console](screen%20shots/TP2/3H2Console.png) 
 
-On verifie que les tests marche bien.
+On verifie que les tests marche bien.  
 
 ![patients](screen%20shots/TP2/Screenshot%202022-04-10%20155926.png)
 
