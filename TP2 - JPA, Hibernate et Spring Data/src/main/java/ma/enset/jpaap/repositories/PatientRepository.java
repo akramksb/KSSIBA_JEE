@@ -10,5 +10,4 @@ import java.util.List;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     List<Patient> findByMalade(boolean m);
     Page<Patient> findByMalade(boolean m, Pageable pageable);
-    List<Patient> findByMaladeAndScoreLessThan(boolean m, int score);
 }
