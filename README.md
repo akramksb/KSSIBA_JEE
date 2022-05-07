@@ -1,6 +1,11 @@
 # KSSIBA_JEE
 *Cette repo est une collection des traveaux pratiques JEE - ENSET 2021/2022*
 
+### Comptes Rendues :  
+*   #### [TP1 : Inversion de contrôle et Injection des dépendances](#1---inversion-de-contrôle-et-injection-des-dépendances) [[code source](./TP1%20-%20IOC%20et%20Injection%20des%20d%C3%A9pendances/)]
+
+*   #### [TP2 : JPA, Hibernate et Spring Data](#2---jpa-hibernate-et-spring-data) [[code source](./TP2%20-%20JPA%2C%20Hibernate%20et%20Spring%20Data/)]  
+
 ## [1 - Inversion de contrôle et Injection des dépendances](./TP1%20-%20IOC%20et%20Injection%20des%20d%C3%A9pendances/)
 
 
@@ -126,7 +131,6 @@ public class MetierImpl implements IMetier{
 
 
 ## [2 - JPA, Hibernate et Spring Data](./TP2%20-%20JPA%2C%20Hibernate%20et%20Spring%20Data/)
-
 On crée un projet spring avec les dependances suivantes :  
 
 ![dependances](screen%20shots/TP2/1dependencies.png)
