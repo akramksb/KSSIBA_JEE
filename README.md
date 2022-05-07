@@ -128,10 +128,14 @@ public class MetierImpl implements IMetier{
 ## [2 - JPA, Hibernate et Spring Data](./TP2%20-%20JPA%2C%20Hibernate%20et%20Spring%20Data/)
 
 On crée un projet spring avec les dependances suivantes :  
+
 ![dependances](screen%20shots/TP2/1dependencies.png)
 
-On modifie le fichier `applicationContext.xml`, danslequel on spécifie note base de donnée et le port de l'application.  
-![applicationContext.xml](screen%20shots/TP2/2applicationPropreties.png)
+On modifie le fichier `application.properties`, danslequel on spécifie note base de donnée et le port de l'application.  
+
+![application.properties](screen%20shots/TP2/2applicationPropreties.png)
+
+#### Patients
 
 On crée la class persistante Patient avec l'annotaion `@Entity`  
 les annotaions `@Data`, `@NoArgsConstructor` et `@AllArgsConstructor` sont de Lombok pour générer automatiquement les getters et setters, ansi que les constructeur avec et sans paramètres.
@@ -178,5 +182,49 @@ Après le demarrage de l'application, on se dirige vers http://localhost:8082/h2
 
 On verifie que les tests marche bien.  
 
-![patients](screen%20shots/TP2/Screenshot%202022-04-10%20155926.png)
+![patients](screen%20shots/TP2/Screenshot%202022-04-10%20155926.png)  
 
+#### MySQL
+
+Maintenant, pour basculer vers une base de donnée MySQL.  
+Il s'uffit d'ajouter la dependance suivante :  
+```xml
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+</dependency>
+```
+
+Et de modifier le fichier `application.properties`  
+
+![application.properties](screen%20shots/TP2/5applicationPropreties.png)
+
+
+#### Relations
+
+On ajoute les entités `Medecin`, `RendezVous` et `Consultation`.  
+
+Pour établir les relations entre ces table, on utilise les annotations des `@OneToMany`, `ManyToOne` et `@OneToOne` de __SpringJpa__.  
+
+Par exemple, un patient peut avoir plusieurs rendez-vous. Donc, dans la classe Patient on va ajouter une `Collection` de RendezVous avec l'annotaion `@OneToMany`:  
+```java
+@OneToMany( mappedBy = "patient", fetch = FetchType.LAZY)
+private Collection<RendezVous> rendezVous;
+```
+>'mappedBy' ici fait référence à l'attribut patient dans la classe RendezVous, qui se traduit par une clé entrangère dans la base de donnée.  
+
+Et dans la classe RendezVous, on va ajouter un attribut Patient avec l'annoation `@ManyToOne`:  
+
+```java
+@ManyToOne
+private Patient patient;
+@ManyToOne
+private Medecin medecin;
+@OneToOne(mappedBy = "rendezVous")
+private Consultation consultation;
+```
+
+On fait pareil pour [les autres classes](./TP2%20-%20JPA%2C%20Hibernate%20et%20Spring%20Data/src/main/java/ma/enset/jpaap/entities/).  
+
+On execute l'application, on voit que les table sont bien liées dans la base de donée.  
+![hospital_db](./screen%20shots/TP2/hospital_db.png)

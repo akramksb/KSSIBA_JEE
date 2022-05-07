@@ -5,6 +5,7 @@ import ma.enset.jpaap.repositories.ConsultationRepository;
 import ma.enset.jpaap.repositories.MedecinRepository;
 import ma.enset.jpaap.repositories.PatientRepository;
 import ma.enset.jpaap.repositories.RendezVousRepository;
+import ma.enset.jpaap.service.IHospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,12 +26,10 @@ public class JpaApplication{
     }
 
     @Bean
-    CommandLineRunner start(
-            PatientRepository patientRepository,
-            MedecinRepository medecinRepository,
-            RendezVousRepository rendezVousRepository,
-            ConsultationRepository consultationRepository
-    ){
+    CommandLineRunner start(IHospitalService hospitalService,
+                            PatientRepository patientRepository,
+                            MedecinRepository medecinRepository,
+                            RendezVousRepository rendezVousRepository){
         return arg->{
             Stream.of("Akram", "Tarik", "Zakaria")
                     .forEach( name->{
@@ -38,7 +37,7 @@ public class JpaApplication{
                         patient.setNom(name);
                         patient.setDateNaissance(new Date());
                         patient.setMalade( (Math.random()<0.5)? false: true);
-                        patientRepository.save( patient );
+                        hospitalService.savePatient( patient );
                     });
             Stream.of("Kssiba", "Ofkir", "Hadoumi")
                     .forEach( name->{
@@ -46,7 +45,7 @@ public class JpaApplication{
                         medecin.setNom( name );
                         medecin.setEmail( name+"@gmail.com" );
                         medecin.setSpecialite( Math.random()<0.5? "Cardio":"Dentist" );
-                        medecinRepository.save( medecin );
+                        hospitalService.saveMedecin( medecin );
                     });
 
             Patient patient = patientRepository.findByNom("Akram");
@@ -58,7 +57,7 @@ public class JpaApplication{
             rendezVous.setMedecin(medecin);
             rendezVous.setPatient(patient);
 
-            rendezVousRepository.save( rendezVous );
+            hospitalService.saveRDV( rendezVous );
 
             RendezVous rendezVous1 = rendezVousRepository.findById(1L).orElse(null);
             Consultation consultation = new Consultation();
@@ -66,7 +65,7 @@ public class JpaApplication{
             consultation.setRendezVous(rendezVous1);
             consultation.setRapport("Rapport ...");
 
-            consultationRepository.save(consultation);
+            hospitalService.saveConsultation(consultation);
 
         };
     }
