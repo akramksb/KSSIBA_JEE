@@ -8,6 +8,8 @@
 
 *   #### [TP3 : Spring MVC Thymeleaf](#3---spring-mvc-thymeleaf) [[code source](./TP3%20-%20Spring%20MVC%20Thymeleaf/)]  
 
+*   #### [Projet : Digital Banking](https://github.com/akramksb/Digital-Banking)
+
 ## [1 - Inversion de contrôle et Injection des dépendances](./TP1%20-%20IOC%20et%20Injection%20des%20d%C3%A9pendances/)
 
 
@@ -129,8 +131,11 @@ public class MetierImpl implements IMetier{
             IMetier metier = (IMetier) context.getBean(IMetier.class);
             System.out.println(metier.calcul());
         }
-        ```
+        ```  
 
+<div align="right">
+    <a href="#comptes-rendues">↥ Back To Top</a>
+</div>
 
 ## [2 - JPA, Hibernate et Spring Data](./TP2%20-%20JPA%2C%20Hibernate%20et%20Spring%20Data/)
 On crée un projet spring avec les dependances suivantes :  
@@ -141,7 +146,7 @@ On modifie le fichier `application.properties`, danslequel on spécifie note bas
 
 ![application.properties](screen%20shots/TP2/2applicationPropreties.png)
 
-#### Patients
+### Patients
 
 On crée la class persistante Patient avec l'annotaion `@Entity`  
 les annotaions `@Data`, `@NoArgsConstructor` et `@AllArgsConstructor` sont de Lombok pour générer automatiquement les getters et setters, ansi que les constructeur avec et sans paramètres.
@@ -190,7 +195,7 @@ On verifie que les tests marche bien.
 
 ![patients](screen%20shots/TP2/Screenshot%202022-04-10%20155926.png)  
 
-#### MySQL
+### MySQL
 
 Maintenant, pour basculer vers une base de donnée MySQL.  
 Il s'uffit d'ajouter la dependance suivante :  
@@ -206,7 +211,7 @@ Et de modifier le fichier `application.properties`
 ![application.properties](screen%20shots/TP2/5applicationPropreties.png)
 
 
-#### Relations
+### Relations
 
 On ajoute les entités `Medecin`, `RendezVous` et `Consultation`.  
 
@@ -235,7 +240,9 @@ On fait pareil pour [les autres classes](./TP2%20-%20JPA%2C%20Hibernate%20et%20S
 On execute l'application, on voit que les table sont bien liées dans la base de donée.  
 ![hospital_db](./screen%20shots/TP2/hospital_db.png)  
 
-
+<div align="right">
+    <a href="#comptes-rendues">↥ Back To Top</a>
+</div>  
 
 ## [3 - Spring MVC Thymeleaf](./TP3%20-%20Spring%20MVC%20Thymeleaf/)
 
@@ -249,7 +256,7 @@ On crée la classe persistante Patient, chaque patient est défini par:
 - Son id
 - Son nom
 - Sa date naissance
-- Un attribut qui indique si il est en malade ou non  
+- Un attribut qui indique si il est malade ou non  
 
 Pour valider qu'un champs ne doit pas être vide, on ajoute l'annotation `@NotEmpty`  
 
@@ -392,4 +399,8 @@ __la liste des patients en tant qu'administrateur__
 
 
 __la liste des patients en tant qu'utilisateur__    
-![liste des etudiant as admin](./screen%20shots/TP3/listPatients2.png)
+![liste des etudiant as admin](./screen%20shots/TP3/listPatients2.png)  
+
+<div align="right">
+    <a href="#comptes-rendues">↥ Back To Top</a>
+</div>
